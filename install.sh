@@ -11,7 +11,7 @@ public_key_hex='1ab34f5688c2aba68328c34d6baff4d73606df5a6236195322d4e7b1205be23d
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get update -qq
-apt-get install -y --no-install-recommends ca-certificates curl gh jq openssl sqlite3 xxd
+apt-get install -y --no-install-recommends ca-certificates curl jq openssl sqlite3 xxd
 work="$(mktemp -d /tmp/wind-monitor-install.XXXXXX)"
 trap 'rm -rf -- "$work"' EXIT
 for asset in wind-monitor-linux-x86_64 wind-monitor-updater-linux-x86_64 release-manifest.json release-manifest.sig; do
