@@ -33,6 +33,10 @@ verify_asset() {
 verify_asset wind-monitor-linux-x86_64 binary_sha256 binary_size
 verify_asset wind-monitor-updater-linux-x86_64 updater_sha256 updater_size
 [[ "$(jq -er '.channel' "$work/release-manifest.json")" == stable ]]
+if [[ "${WIND_MONITOR_INSTALL_VERIFY_ONLY:-0}" == 1 ]]; then
+  echo "Verified signed Wind Monitor $(jq -r .version "$work/release-manifest.json") installer assets."
+  exit 0
+fi
 
 id wind-monitor >/dev/null 2>&1 || useradd --system --home /var/lib/wind-monitor --shell /usr/sbin/nologin wind-monitor
 install -d -o root -g root -m 0755 /opt/wind-monitor/bin /opt/wind-monitor/ops
